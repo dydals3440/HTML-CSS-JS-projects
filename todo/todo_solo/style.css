@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+button {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  text-align: center;
+  background-color: aliceblue;
+}
+
+.list {
+  background-color: white;
+  width: 400px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.header {
+  height: 48px;
+  border-radius: 20px 20px 0 0;
+  color: white;
+  line-height: 48px;
+  font-size: 24px;
+  background: linear-gradient(
+    166deg,
+    rgba(237, 193, 211, 1) 0%,
+    rgba(219, 192, 216, 1) 35%,
+    rgba(127, 188, 242, 1) 100%
+  );
+}
+
+.items {
+  background-color: #ced3df;
+  height: 500px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 32px;
+}
+
+.item__divider {
+  height: 1px;
+  width: 90%;
+  background-color: lightgoldenrodyellow;
+  margin: auto;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    166deg,
+    rgba(237, 193, 211, 1) 0%,
+    rgba(219, 192, 216, 1) 35%,
+    rgba(127, 188, 242, 1) 100%
+  );
+  border-radius: 0 0 20px 20px;
+}
+
+.footer__input {
+  width: 100%;
+  border: none;
+  height: 25px;
+}
+
+.footer__button {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  font-size: 35px;
+  height: 50%;
+  width: 50px;
+}
