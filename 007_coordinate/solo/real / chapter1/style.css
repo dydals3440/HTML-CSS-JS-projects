@@ -1,0 +1,28 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+}
+
+.target {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+}
+
+.vertical {
+  position: absolute;
+  height: 100%;
+}
+
+.horizontal {
+  position: absolute;
+  width: 100%;
+}
+
+.coordinate {
+  color: white;
+  position: absolute;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coordinates</title>
+    <style>
+      body {
+        background-color: black;
+        /* overflow: hidden 시 스크롤 X */
+        /* overflow: hidden; */
+      }
+
+      .box {
+        width: 250px;
+        height: 250px;
+        background-color: blanchedalmond;
+        margin-bottom: 4px;
+        border-radius: 4px;
+      }
+
+      .special {
+        background-color: lightcoral;
+      }
+
+      .buttons {
+        /* 버튼을 고정시키기 (스크롤 하더라도) */
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="buttons">
+      <button class="scroll-down">Scroll by 100px(y)</button>
+      <button class="scroll-up">Scroll to 100px(y)</button>
+      <button class="scroll-special">Scroll into special</button>
+    </div>
+    <div class="box_container">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box special"></div>
+      <div class="box"></div>
+    </div>
+    <script>
+      const special = document.querySelector(".special");
+      special.addEventListener("click", (event) => {
+        const rect = special.getBoundingClientRect();
+        console.log(rect);
+        console.log(`client: ${event.clientX}, ${event.clientY}`);
+        console.log(`page: ${event.pageX}, ${event.pageY}`);
+      });
+
+      const scrollDown = document.querySelector(".scroll-down");
+      scrollDown.addEventListener("click", () => {
+        window.scrollBy(0, 100);
+        // window.scrollBy({top: 100, left: 0, behavior: 'smooth'}); // mdn properties 참조 위와같이 가능
+      });
+
+      const scrollUp = document.querySelector(".scroll-up");
+      scrollUp.addEventListener("click", () => {
+        window.scrollTo(0, 100);
+      });
+
+      const scrollSpecial = document.querySelector(".scroll-special");
+      const specialXY = [special.offsetLeft, special.offsetTop];
+      scrollSpecial.addEventListener("click", () => {
+        window.scrollBy(specialXY[0], specialXY[1]);
+        // special.scrollIntoView(); 이렇게 사용해도 된다.
+      });
+    </script>
+  </body>
+</html>
+
+ScrollBy: 원하는 px만큼 위로 ScrollTo: 고정된 px로 이동 ScrollIntoView: 해당하는
+Element로 이동

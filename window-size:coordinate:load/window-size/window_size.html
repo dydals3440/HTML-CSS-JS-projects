@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Size</title>
+    <style>
+      .tag {
+        /* 컨텐츠를 감사면서 사이즈를 맞춤 */
+        display: inline-block;
+        background-color: thistle;
+        padding: 16px;
+        margin-top: 16px;
+        font-size: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="tag Screen">window.screen:</div>
+      <script>
+        // dom요소중에 class가 .tag 인 아이가 첫번째로 발견 후 tag 변수에 할당 tag는 div요소 할당
+        const tag = document.querySelector(".tag");
+        function updateTag() {
+          tag.innerHTML = `
+          window.screen: ${window.screen.width}, ${window.screen.height} <br>
+          window.outer: ${window.outerWidth}, ${window.outerHeight} <br>
+          window.inner: ${window.innerWidth}, ${window.innerHeight} <br>
+          documentElement.clientWindow: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+          `;
+        }
+
+        // 윈도우의 사이즈가 resize 될때마다 callback함수(function) 호출
+        window.addEventListener("resize", () => {
+          updateTag();
+        });
+        // 페이지가 처음 로딩이 되면 아래 함수가 제일먼저 실행되면서 처음부터 window.screen 만 보이는게 아닌 전체 다 보임, screen, outer, inner, clientwindow
+        updateTag();
+      </script>
+    </div>
+  </body>
+</html>
