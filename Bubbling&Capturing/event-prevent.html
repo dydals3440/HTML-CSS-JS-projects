@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 250px;
+        height: 250px;
+        background-color: yellow;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="checkbox" />
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+      document.addEventListener(
+        "wheel",
+        (event) => {
+          // 빠르게 무언가 동작해야하는 이벤트들은(스크롤같은것),
+          // 브라우저는 우리에게 스크롤링 되고있다고 알려주고, 자기 할일은 함.
+          // 브라우저를 취소 못한다는 것임
+          console.log("scrolling");
+          event.preventDefault();
+          // 브라우저를 취소할 수 있는 방법 ? active로 변신 (왠만해서는 passive를 false로 설정안하는게 좋습니다)
+        },
+        { passive: false }
+      );
+      const checkbox = document.querySelector("input");
+      checkbox.addEventListener("click", (event) => {
+        // long (오랫동안 일을 하게 된다)
+        console.log("checked");
+        // checked는 출력되지만 check가 되지않음.
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>

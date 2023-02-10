@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .outer {
+        width: 500px;
+        height: 500px;
+        background-color: yellow;
+      }
+
+      .middle {
+        width: 50%;
+        height: 50%;
+        margin: auto;
+        background-color: thistle;
+        transform: translateY(50%);
+      }
+
+      button {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="middle">
+        <button>Click Me</button>
+      </div>
+    </div>
+    <script>
+      const outer = document.querySelector(".outer");
+      const middle = document.querySelector(".middle");
+      const button = document.querySelector("button");
+
+      outer.addEventListener("click", (event) => {
+        // 타겟이 서로 다르면 처리하지 않음. 내가 관심있는 target일때만 이벤트 처리
+        if (event.target !== event.currentTarget) {
+          return;
+        }
+        console.log(`outer: ${event.currentTarget}, ${event.target}`);
+      });
+      middle.addEventListener("click", (event) => {
+        if (event.target !== event.currentTarget) {
+          return;
+        }
+        console.log(`middle ${event.currentTarget}, ${event.target}`);
+      });
+      button.addEventListener("click", (event) => {
+        console.log(`button1 ${event.currentTarget}, ${event.target}`);
+        // event.stopPropagation(); 버블링 안일어나게 하는 것.
+        // event.stopImmediatePropagation(내가 최고야 나만 핸들링 일어나는 것)
+        // 가능하면 사용하지 않는게 좋습니다.
+      });
+      button.addEventListener("click", (event) => {
+        console.log(`button2 ${event.currentTarget}, ${event.target}`);
+      });
+    </script>
+  </body>
+</html>
