@@ -1,0 +1,119 @@
+:root {
+  --color-black: black;
+  --color-white: #eeeeee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 게임이랑 팝업이 다 중간에 오고싶음 */
+/* 게임이랑 팝업이 다 body안에 있으니 body태그에 설정 */
+/* 그러나 margin이 있어서 정상적으로 작동하지 않을 것이다 */
+body {
+  text-align: center;
+}
+
+/* basic btn setting */
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.game {
+  /* 알게된점 */
+  background: url(./img/background.png) center/cover;
+  border-radius: 20px;
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.game__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.game__button {
+  border: 4px solid var(--color-black);
+  border-radius: 10px;
+  font-size: 24px;
+  background-color: wheat;
+  width: 60px;
+  height: 60px;
+  transition: transform 300ms ease-in;
+  /* display: none; */
+}
+
+.game__button:hover {
+  transform: scale(1.1);
+}
+
+.game__timer {
+  width: 100px;
+  background-color: white;
+  border: 5px solid black;
+  border-radius: 20px;
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+.game__score {
+  width: 50px;
+  height: 50px;
+  font-size: 46px;
+  background-color: darksalmon;
+  border: 3px solid black;
+  border-radius: 50%;
+  color: white;
+  margin-top: 8px;
+}
+
+.game__field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* 집앞에 당근이 있으면 안되니 margin 조정 */
+  margin-top: 40px;
+}
+
+.pop-up {
+  width: 400px;
+  height: 140px;
+  padding: 20px;
+  /* opacity랑 background로 설정할때는 안에 아이콘 글씨도 적용됨 */
+  /* 검은색 + opacity 90% */
+  background-color: #00000090;
+  color: white;
+  text-align: center;
+  margin: auto;
+  /* 팝업창을 게임 화면 위로 */
+  transform: translateY(-150%);
+  border-radius: 20px;
+}
+
+.pop-up--hide {
+  display: none;
+}
+
+.pop-up__refresh {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  background-color: wheat;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.pop-up__message {
+  /* 원래는 아이콘 옆에 글씨가 있었는데 block통해 밑으로 내림 */
+  display: block;
+  font-size: 38px;
+}
