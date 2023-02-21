@@ -16,6 +16,12 @@ const popUp = document.querySelector(".pop-up");
 const popUpBtn = document.querySelector(".pop-up__refresh");
 const popUpMessage = document.querySelector(".pop-up__message");
 
+const carrotSound = new Audio("./sound/carrot_pull.mp3");
+const alertSound = new Audio("./sound/alert.wav");
+const bgSound = new Audio("./sound/bg.mp3");
+const bugPullSound = new Audio("./sound/bug_pull.mp3");
+const gameWinSound = new Audio("./sound/game_win.mp3");
+
 let started = false;
 let timer = undefined;
 let score = 0;
@@ -46,18 +52,28 @@ field.addEventListener("click", (e) => {
     target.remove();
     // 점수 증가
     score++;
+    playSound(carrotSound);
     // 그 후 UI에 업데이트
     updateScore();
     // 1. 종료조건(당근을 다 먹었을때) => true
     if (score === CARROT_COUNT) {
-      finishGame();
+      finishGame(true);
     }
   } else if (target.matches(".bug")) {
     // 2. 종료조건(벌레를 클릭했을때) =>
-    stopGameTimer();
     finishGame(false);
   }
 }); // finishgame을 true나 false로 정의하는 것은 사실 좋은 코드가 아니랍니다.
+
+function playSound(sound) {
+  // 소리 파일이 짧기에 당근을 연달아 누르면 소리가 안날 수도 있으니 항상 초기화
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function pauseSound(sound) {
+  sound.pause();
+}
 
 // 3. 종료조건 (타이머 끝날때)
 
@@ -74,6 +90,15 @@ function finishGame(win) {
   started = false;
   // 2. gamebtn 안보이게
   hideGameButton();
+  if (win) {
+    playSound(gameWinSound);
+  } else {
+    playSound(bugPullSound);
+  }
+  // 게임을 승리해도 background sound 제거
+  pauseSound(bgSound);
+  // 게임을 끝내기 전에는 항상 타이머를 종료해주기.
+  stopGameTimer();
   showPopUpAndText(win ? "YOU WIN" : "YOU LOST");
 }
 
@@ -82,12 +107,16 @@ function gameStart() {
   showStopButton();
   showTimerAndScore();
   startGameTimer();
+  // 게임시작시 배경음악
+  playSound(bgSound);
 }
 
 function gameStop() {
   stopGameTimer();
   hideGameButton();
   showPopUpAndText("replay????");
+  playSound(alertSound);
+  pauseSound(bgSound);
 }
 
 function showStopButton() {
