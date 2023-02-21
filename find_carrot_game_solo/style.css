@@ -64,6 +64,8 @@ button {
   font-size: 32px;
   margin-top: 8px;
   visibility: hidden;
+  user-select: none;
+  cursor: auto;
 }
 
 .game__score {
@@ -120,4 +122,14 @@ button {
   /* 원래는 아이콘 옆에 글씨가 있었는데 block통해 밑으로 내림 */
   display: block;
   font-size: 38px;
+}
+
+.carrot,
+.bug {
+  transition: transform 100ms ease-in;
+}
+
+.carrot:hover,
+.bug:hover {
+  transform: scale(1.1);
 }

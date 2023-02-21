@@ -39,7 +39,6 @@ gameBtn.addEventListener("click", () => {
   } else {
     gameStart();
   }
-  started = !started; // 이처리를 해줘야지 시작했으면 => 다시 시작했다고 변경해주어야함
 });
 
 field.addEventListener("click", (e) => {
@@ -81,7 +80,6 @@ popUpBtn.addEventListener("click", () => {
   // 게임 시작 => 팝업창 없앰 순서
   gameStart();
   hidePopUpAndText();
-  showStopButton();
 });
 
 // 승패 여부를 인자로
@@ -103,6 +101,7 @@ function finishGame(win) {
 }
 
 function gameStart() {
+  started = true;
   initGame();
   showStopButton();
   showTimerAndScore();
@@ -112,10 +111,10 @@ function gameStart() {
 }
 
 function gameStop() {
+  started = false;
   stopGameTimer();
   hideGameButton();
   showPopUpAndText("replay????");
-  playSound(alertSound);
   pauseSound(bgSound);
 }
 
@@ -123,6 +122,7 @@ function showStopButton() {
   const icon = document.querySelector(".fa-solid");
   icon.classList.add("fa-stop");
   icon.classList.remove("fa-play");
+  gameBtn.style.visibility = "visible";
 }
 
 function hideGameButton() {
@@ -199,5 +199,3 @@ function randomNumber(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
-initGame();
