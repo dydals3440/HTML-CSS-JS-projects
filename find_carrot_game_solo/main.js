@@ -21,6 +21,7 @@ let timer = undefined;
 let score = 0;
 
 function initGame() {
+  field.innerText = "";
   addItem("carrot", CARROT_COUNT, "./img/carrot.png");
   addItem("bug", BUG_COUNT, "./img/bug.png");
 }
@@ -42,13 +43,22 @@ function gameStart() {
   showPopUpAndText();
 }
 
-function gameStop() {}
+function gameStop() {
+  stopGameTimer();
+  hideGameButton();
+  showPopUpAndText("replay????");
+}
 
 function showStopButton() {
   const icon = document.querySelector(".fa-solid");
   icon.classList.add("fa-stop");
   icon.classList.remove("fa-play");
 }
+
+function hideGameButton() {
+  gameBtn.style.visibility = "hidden";
+}
+
 function showTimerAndScore() {
   gameTimer.style.visibility = "visible";
   gameScore.style.visibility = "visible";
@@ -67,15 +77,19 @@ function startGameTimer() {
   }, 1000);
 }
 
+function stopGameTimer() {
+  clearInterval(timer);
+}
+
 function updateTimerText(time) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   gameTimer.innerText = `${minutes}:${seconds}`;
 }
 
-function showPopUpAndText() {
+function showPopUpAndText(text) {
   popUp.style.visibility = "visible";
-  popUpMessage.innerText = "regame?";
+  popUpMessage.innerText = text;
 }
 
 // 아이템을 추가
