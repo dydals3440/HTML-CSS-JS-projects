@@ -1,25 +1,28 @@
 "use strict";
 
-// function init() 활용해 당근과 벌레 5개 랜덤위치 생성
+const CARROT_SIZE = 80;
+const GAME_DURATION_SEC = 5;
+const CARROT_COUNT = 5;
+const BUG_COUNT = 5;
+
 const gameBtn = document.querySelector(".game__button");
 const gameTimer = document.querySelector(".game__timer");
 const gameScore = document.querySelector(".game__score");
 
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
-const CARROT_SIZE = 80;
 
 const popUp = document.querySelector(".pop-up");
 const popUpBtn = document.querySelector(".pop-up__refresh");
 const popUpMessage = document.querySelector(".pop-up__message");
 
 let started = false;
-let time = 20;
+let timer = undefined;
 let score = 0;
 
 function initGame() {
-  addItem("carrot", 5, "./img/carrot.png");
-  addItem("bug", 5, "./img/bug.png");
+  addItem("carrot", CARROT_COUNT, "./img/carrot.png");
+  addItem("bug", BUG_COUNT, "./img/bug.png");
 }
 
 gameBtn.addEventListener("click", () => {
@@ -35,8 +38,8 @@ function gameStart() {
   initGame();
   showStopButton();
   showTimerAndScore();
+  startGameTimer();
   showPopUpAndText();
-  startTimer();
 }
 
 function gameStop() {}
@@ -46,17 +49,33 @@ function showStopButton() {
   icon.classList.add("fa-stop");
   icon.classList.remove("fa-play");
 }
+function showTimerAndScore() {
+  gameTimer.style.visibility = "visible";
+  gameScore.style.visibility = "visible";
+}
 
-function showTimerAndScore() {}
+function startGameTimer() {
+  let remainingTime = GAME_DURATION_SEC;
+  updateTimerText(remainingTime);
+  timer = setInterval(() => {
+    if (remainingTime <= 0) {
+      // 타이머 종료 후 더이상 진행되지 않게 return
+      clearInterval(timer);
+      return;
+    }
+    updateTimerText(--remainingTime);
+  }, 1000);
+}
+
+function updateTimerText(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  gameTimer.innerText = `${minutes}:${seconds}`;
+}
 
 function showPopUpAndText() {
   popUp.style.visibility = "visible";
   popUpMessage.innerText = "regame?";
-}
-
-function startTimer() {
-  gameScore.style.visibility = "visible";
-  gameTimer.style.visibility = "visible";
 }
 
 // 아이템을 추가
