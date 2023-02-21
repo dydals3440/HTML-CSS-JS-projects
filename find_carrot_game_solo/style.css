@@ -63,6 +63,7 @@ button {
   border-radius: 20px;
   font-size: 32px;
   margin-top: 8px;
+  visibility: hidden;
 }
 
 .game__score {
@@ -74,6 +75,7 @@ button {
   border-radius: 50%;
   color: white;
   margin-top: 8px;
+  visibility: hidden;
 }
 
 .game__field {
@@ -101,7 +103,8 @@ button {
 }
 
 .pop-up--hide {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
 }
 
 .pop-up__refresh {

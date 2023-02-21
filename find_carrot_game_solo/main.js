@@ -1,15 +1,62 @@
 "use strict";
 
 // function init() 활용해 당근과 벌레 5개 랜덤위치 생성
-const game__button = document.querySelector(".game__button");
+const gameBtn = document.querySelector(".game__button");
+const gameTimer = document.querySelector(".game__timer");
+const gameScore = document.querySelector(".game__score");
+
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
 const CARROT_SIZE = 80;
 
+const popUp = document.querySelector(".pop-up");
+const popUpBtn = document.querySelector(".pop-up__refresh");
+const popUpMessage = document.querySelector(".pop-up__message");
+
+let started = false;
+let time = 20;
+let score = 0;
+
 function initGame() {
-  console.log(fieldRect);
   addItem("carrot", 5, "./img/carrot.png");
   addItem("bug", 5, "./img/bug.png");
+}
+
+gameBtn.addEventListener("click", () => {
+  if (started) {
+    gameStop();
+  } else {
+    gameStart();
+  }
+  started = !started; // 이처리를 해줘야지 시작했으면 => 다시 시작했다고 변경해주어야함
+});
+
+function gameStart() {
+  initGame();
+  showStopButton();
+  showTimerAndScore();
+  showPopUpAndText();
+  startTimer();
+}
+
+function gameStop() {}
+
+function showStopButton() {
+  const icon = document.querySelector(".fa-solid");
+  icon.classList.add("fa-stop");
+  icon.classList.remove("fa-play");
+}
+
+function showTimerAndScore() {}
+
+function showPopUpAndText() {
+  popUp.style.visibility = "visible";
+  popUpMessage.innerText = "regame?";
+}
+
+function startTimer() {
+  gameScore.style.visibility = "visible";
+  gameTimer.style.visibility = "visible";
 }
 
 // 아이템을 추가
